@@ -165,7 +165,7 @@ def get_hotspot_SSID():
 # Returns True for success, False for error.
 def start_hotspot():
     return connect_to_AP(CONN_TYPE_HOTSPOT, HOTSPOT_CONNECTION_NAME, \
-            get_hotspot_SSID())
+            get_hotspot_SSID(),None,'12345678')
 
 
 #------------------------------------------------------------------------------
@@ -194,7 +194,13 @@ def connect_to_AP(conn_type=None, conn_name=GENERIC_CONNECTION_NAME, \
         hotspot_dict = {
             '802-11-wireless': {'band': 'bg',
                                 'mode': 'ap',
+                                'security':'802-11-wireless-security',
                                 'ssid': ssid},
+            '802-11-wireless-security': {
+                'auth-alg': 'open',
+                'key-mgmt': 'wpa-psk',
+                'psk': password
+            },
             'connection': {'autoconnect': False,
                            'id': conn_name,
                            'interface-name': 'wlan0',
